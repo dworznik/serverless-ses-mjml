@@ -37,6 +37,7 @@ class ServerlessSesMjmlPlugin {
       ({ name }) => name === this.options.template
     );
     const { HtmlPart, TextPart } = this.generateParts(location, template);
+    console.log(TextPart);
     const filePath = tempWrite.sync(HtmlPart || TextPart, "template.html");
     this.serverless.cli.log(`Template Created - ${filePath}`);
     opn(filePath);
@@ -80,7 +81,8 @@ class ServerlessSesMjmlPlugin {
     const mjmlString = fs.readFileSync(path.join(location, mjml), "utf8");
     const htmlString = mjml2html(mjmlString, {
       keepComments: false,
-      minify: true
+      minify: true,
+      filePath: path.join(location, mjml)
     });
 
     if (htmlString.errors && htmlString.errors.length) {
