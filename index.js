@@ -80,7 +80,8 @@ class ServerlessSesMjmlPlugin {
     const mjmlString = fs.readFileSync(path.join(location, mjml), "utf8");
     const htmlString = mjml2html(mjmlString, {
       keepComments: false,
-      minify: true
+      minify: true,
+      filePath: path.join(location, mjml)
     });
 
     if (htmlString.errors && htmlString.errors.length) {
