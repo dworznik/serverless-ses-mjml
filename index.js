@@ -77,7 +77,7 @@ class ServerlessSesMjmlPlugin {
   }
 
   generateParts(location, { name, subject, mjml, text }) {
-    const textString = fs.readFileSync(path.join(location, text), "utf8");
+    const textString = [].concat(text).reduce(function(o, t) { return o + fs.readFileSync(path.join(location, t), "utf8");}, "")
     const mjmlString = fs.readFileSync(path.join(location, mjml), "utf8");
     const htmlString = mjml2html(mjmlString, {
       keepComments: false,
