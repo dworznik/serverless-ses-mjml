@@ -37,6 +37,7 @@ class ServerlessSesMjmlPlugin {
       ({ name }) => name === this.options.template
     );
     const { HtmlPart, TextPart } = this.generateParts(location, template);
+    console.log(TextPart);
     const filePath = tempWrite.sync(HtmlPart || TextPart, "template.html");
     this.serverless.cli.log(`Template Created - ${filePath}`);
     opn(filePath);
